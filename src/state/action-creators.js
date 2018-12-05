@@ -67,6 +67,7 @@ export type CompleteLiftAction = {|
     client: InitialDragPositions,
     viewport: Viewport,
     autoScrollMode: AutoScrollMode,
+    preventWindowScroll: boolean,
   |}
 |}
 
@@ -75,6 +76,7 @@ export const completeLift = (
   client: InitialDragPositions,
   viewport: Viewport,
   autoScrollMode: AutoScrollMode,
+  preventWindowScroll: boolean,
 ): CompleteLiftAction => ({
   type: 'COMPLETE_LIFT',
   payload: {
@@ -82,6 +84,7 @@ export const completeLift = (
     client,
     viewport,
     autoScrollMode,
+    preventWindowScroll,
   },
 });
 
@@ -464,6 +467,7 @@ export const lift = (id: DraggableId,
   client: InitialDragPositions,
   viewport: Viewport,
   autoScrollMode: AutoScrollMode,
+  preventWindowScroll: boolean,
 ) => (dispatch: Dispatch, getState: Function) => {
   // Phase 1: Quickly finish any current drop animations
   const initial: State = getState();
@@ -513,7 +517,7 @@ export const lift = (id: DraggableId,
         return;
       }
 
-      dispatch(completeLift(id, client, viewport, autoScrollMode));
+      dispatch(completeLift(id, client, viewport, autoScrollMode, preventWindowScroll));
       timings.finish('LIFT');
     });
   });

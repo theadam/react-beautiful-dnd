@@ -45,8 +45,10 @@ export default ({
         return;
       }
 
+      const preventWindowScroll = current.drag.initial.preventWindowScroll;
+
       if (current.drag.initial.autoScrollMode === 'FLUID') {
-        fluidScroll(current);
+        fluidScroll(current, preventWindowScroll);
         return;
       }
 
@@ -56,7 +58,7 @@ export default ({
         return;
       }
 
-      jumpScroll(current);
+      jumpScroll(current, preventWindowScroll);
       return;
     }
 

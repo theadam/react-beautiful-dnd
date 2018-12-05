@@ -95,7 +95,7 @@ export default ({
     return remainder;
   };
 
-  const jumpScroller: JumpScroller = (state: State) => {
+  const jumpScroller: JumpScroller = (state: State, preventWindowScroll: boolean) => {
     const drag: ?DragState = state.drag;
 
     if (!drag) {
@@ -124,7 +124,7 @@ export default ({
     );
 
     // droppable absorbed the entire scroll
-    if (!droppableRemainder) {
+    if (preventWindowScroll || !droppableRemainder) {
       return;
     }
 

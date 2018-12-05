@@ -225,6 +225,8 @@ export type InitialDrag = {|
   // Storing viewport directly to support movement during a window scroll.
   // Value required for comparison with current scroll
   viewport: Viewport,
+  // Whether or not to prevent window scrolling
+  preventWindowScroll: boolean,
 |}
 
 export type CurrentDragPositions = {|

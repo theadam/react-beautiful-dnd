@@ -302,7 +302,7 @@ export default (state: State = clean('IDLE'), action: Action): State => {
       return state;
     }
 
-    const { id, client, viewport, autoScrollMode } = action.payload;
+    const { id, client, viewport, autoScrollMode, preventWindowScroll } = action.payload;
     const page: InitialDragPositions = {
       selection: add(client.selection, viewport.scroll),
       center: add(client.center, viewport.scroll),
@@ -323,6 +323,7 @@ export default (state: State = clean('IDLE'), action: Action): State => {
       client,
       page,
       viewport,
+      preventWindowScroll,
     };
 
     const current: CurrentDrag = {

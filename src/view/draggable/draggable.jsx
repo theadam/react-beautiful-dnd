@@ -21,7 +21,7 @@ import type {
 } from '../drag-handle/drag-handle-types';
 import getCenterPosition from '../get-center-position';
 import Placeholder from '../placeholder';
-import { droppableIdKey, styleContextKey } from '../context-keys';
+import { droppableIdKey, styleContextKey, preventWindowScrollContextKey } from '../context-keys';
 import * as timings from '../../debug/timings';
 import type {
   Props,
@@ -58,6 +58,7 @@ export default class Draggable extends Component<Props, State> {
   static contextTypes = {
     [droppableIdKey]: PropTypes.string.isRequired,
     [styleContextKey]: PropTypes.string.isRequired,
+    [preventWindowScrollContextKey]: PropTypes.bool.isRequired,
   }
 
   constructor(props: Props, context: Object) {
@@ -114,7 +115,13 @@ export default class Draggable extends Component<Props, State> {
       center: getCenterPosition(ref),
     };
 
-    lift(draggableId, initial, getViewport(), autoScrollMode);
+    lift(
+      draggableId,
+      initial,
+      getViewport(),
+      autoScrollMode,
+      this.context[preventWindowScrollContextKey],
+    );
   }
 
   onMove = (client: Position) => {

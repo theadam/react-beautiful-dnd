@@ -248,7 +248,7 @@ export default ({
   const scheduleWindowScroll = rafSchd(scrollWindow);
   const scheduleDroppableScroll = rafSchd(scrollDroppable);
 
-  const scroller = (state: State): void => {
+  const scroller = (state: State, preventWindowScroll: boolean): void => {
     const drag: ?DragState = state.drag;
     if (!drag) {
       console.error('Invalid drag state');
@@ -268,7 +268,11 @@ export default ({
       center,
     });
 
-    if (requiredWindowScroll && canScrollWindow(viewport, requiredWindowScroll)) {
+    if (
+      !preventWindowScroll &&
+      requiredWindowScroll &&
+      canScrollWindow(viewport, requiredWindowScroll)
+    ) {
       scheduleWindowScroll(requiredWindowScroll);
       return;
     }

@@ -43,6 +43,7 @@ const liftDefaults: LiftFnArgs = {
   viewport: getViewport(),
   client: noWhere,
   autoScrollMode: 'FLUID',
+  preventWindowScroll: true,
 };
 
 const state = getStatePreset();
@@ -102,6 +103,7 @@ describe('action creators', () => {
         liftDefaults.client,
         liftDefaults.viewport,
         liftDefaults.autoScrollMode,
+        liftDefaults.preventWindowScroll,
       ));
       expect(store.dispatch).toHaveBeenCalledTimes(5);
     });
@@ -164,6 +166,7 @@ describe('action creators', () => {
             liftDefaults.client,
             liftDefaults.viewport,
             liftDefaults.autoScrollMode,
+            liftDefaults.preventWindowScroll,
           )
         );
 
@@ -210,6 +213,7 @@ describe('action creators', () => {
           liftDefaults.client,
           liftDefaults.viewport,
           liftDefaults.autoScrollMode,
+          liftDefaults.preventWindowScroll,
         ));
 
         // being super careful
